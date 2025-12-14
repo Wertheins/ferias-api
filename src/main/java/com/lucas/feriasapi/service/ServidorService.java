@@ -7,6 +7,8 @@ import com.lucas.feriasapi.model.Servidor;
 import com.lucas.feriasapi.model.Ferias;
 import com.lucas.feriasapi.repository.ServidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +20,9 @@ public class ServidorService {
     @Autowired
     private ServidorRepository servidorRepository;
 
-    public List<ServidorDTO> listarTodos() {
-        return servidorRepository.findAll().stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public Page<ServidorDTO> listarTodos(Pageable pageable) {
+        return servidorRepository.findAll(pageable)
+                .map(this::convertToDTO);
     }
 
     public ServidorDTO buscarPorId(Long id) {

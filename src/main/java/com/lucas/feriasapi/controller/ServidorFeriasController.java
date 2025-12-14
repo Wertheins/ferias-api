@@ -4,6 +4,9 @@ import com.lucas.feriasapi.dto.FeriasDTO;
 import com.lucas.feriasapi.model.Ferias;
 import com.lucas.feriasapi.service.FeriasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +20,12 @@ public class ServidorFeriasController {
     private FeriasService feriasService;
 
     @GetMapping
-    public ResponseEntity<List<FeriasDTO>> listarFeriasPorServidor(@PathVariable Long servidorId) {
-        return ResponseEntity.ok(feriasService.buscarFeriasPorServidor(servidorId));
+    public ResponseEntity<Page<FeriasDTO>> listarFeriasPorServidor(
+            @PathVariable Long servidorId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(feriasService.buscarFeriasPorServidor(servidorId, pageable));
     }
 
     @PostMapping

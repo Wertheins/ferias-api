@@ -6,6 +6,10 @@ API desenvolvida para a prova técnica de gestão de férias de servidores públ
 
 Sistema que permite a um servidor público consultar seus períodos de férias e visualizar dados básicos dos pagamentos associados a esses períodos.
 
+## 🎨 Protótipo de Baixa Fidelidade
+
+[Ver protótipo no Excalidraw](https://excalidraw.com/#json=EQmHYn4I55A3cXq5jloWd,ZqTidL45H6FvKXOja0Xhjw)
+
 ## 🎯 Funcionalidades
 
 ✅ Visualizar períodos de férias de um servidor  
@@ -36,6 +40,8 @@ Informações financeiras.
 SERVIDOR (1) ----< (N) FERIAS (1) ----< (1) PAGAMENTO
 ```
 
+![Modelo de Dados](docs/images/modelo-dados.png)
+
 ## 🔗 Endpoints da API
 
 ### Servidores
@@ -65,34 +71,36 @@ Retorna detalhes de um período específico de férias, incluindo informações 
 ## 🐳 Execução com Docker
 
 ### Pré-requisitos
-- Docker
+- Docker Desktop (Windows) rodando
 - Docker Compose
+
+> ⚠️ **Importante:** Certifique-se de que o Docker Desktop está rodando no Windows antes de executar os comandos.
 
 ### Passos para executar
 
 1. **Clone o repositório**
 ```bash
-git clone <url-do-repositorio>
+git clone https://github.com/Wertheins/ferias-api
 cd ferias-api
 ```
 
-2. **Compile o projeto**
+2. **Suba os containers**
 ```bash
-mvnw clean package -DskipTests
+docker-compose up --build
 ```
 
-3. **Suba os containers**
-```bash
-docker-compose up
-```
+O Docker irá compilar o projeto automaticamente dentro do container.
 
 ### Acessando a aplicação
 
-- **API:** http://localhost:8080
-- **MySQL:** localhost:3306
+- **API:** http://localhost:8081
+- **Documentação Swagger:** http://localhost:8081/swagger-ui.html
+- **MySQL:** localhost:3308
   - Usuário: `root`
   - Senha: `L123@`
   - Database: `ferias_db`
+
+> ⚠️ **Nota:** Credenciais apenas para ambiente de desenvolvimento local.
 
 ### Parando os containers
 
@@ -108,10 +116,11 @@ docker-compose down -v
 ## 🛠️ Tecnologias Utilizadas
 
 - **Java 21**
-- **Spring Boot 4.0.0**
+- **Spring Boot 3.2.0**
 - **Spring Data JPA**
 - **MySQL 8.0**
 - **Lombok**
+- **SpringDoc OpenAPI (Swagger)**
 - **Docker & Docker Compose**
 - **Maven**
 
@@ -137,7 +146,7 @@ ferias-api/
 
 ### 1. Criar um servidor
 ```bash
-curl -X POST http://localhost:8080/servidores \
+curl -X POST http://localhost:8081/servidores \
   -H "Content-Type: application/json" \
   -d '{
     "nome": "João Silva",
@@ -148,7 +157,7 @@ curl -X POST http://localhost:8080/servidores \
 
 ### 2. Criar férias para o servidor
 ```bash
-curl -X POST http://localhost:8080/servidores/1/ferias \
+curl -X POST http://localhost:8081/servidores/1/ferias \
   -H "Content-Type: application/json" \
   -d '{
     "dataInicio": "2025-07-01",
@@ -162,17 +171,22 @@ curl -X POST http://localhost:8080/servidores/1/ferias \
   }'
 ```
 
-### 3. Listar férias do servidor
+### 3. Listar férias do servidor 
 ```bash
-curl http://localhost:8080/servidores/1/ferias
+curl "http://localhost:8081/servidores/1/ferias?page=0&size=10"
 ```
 
-### 4. Ver detalhes de um período específico
+### 4. Listar todos os servidores 
 ```bash
-curl http://localhost:8080/ferias/1
+curl "http://localhost:8081/servidores?page=0&size=10"
 ```
 
-## 👥 Autores
+### 5. Ver detalhes de um período específico
+```bash
+curl http://localhost:8081/ferias/1
+```
+
+## 👥 Autor
 
 Lucas - Prova Técnica de Desenvolvedor
 

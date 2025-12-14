@@ -14,7 +14,7 @@ public class Pagamento {
 
     private BigDecimal valorTotal;
     private LocalDate dataPagamento;
-    private String statusPagamento; // Ex: PREVISTO, PAGO
+    private String statusPagamento;
 
     @OneToOne
     @JoinColumn(name = "ferias_id")

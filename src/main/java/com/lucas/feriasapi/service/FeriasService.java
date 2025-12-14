@@ -7,6 +7,8 @@ import com.lucas.feriasapi.model.Servidor;
 import com.lucas.feriasapi.repository.FeriasRepository;
 import com.lucas.feriasapi.repository.ServidorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,11 +23,9 @@ public class FeriasService {
     @Autowired
     private ServidorRepository servidorRepository;
 
-    public List<FeriasDTO> buscarFeriasPorServidor(Long servidorId) {
-        List<Ferias> ferias = feriasRepository.findByServidorId(servidorId);
-        return ferias.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public Page<FeriasDTO> buscarFeriasPorServidor(Long servidorId, Pageable pageable) {
+        return feriasRepository.findByServidorId(servidorId, pageable)
+                .map(this::convertToDTO);
     }
 
     public FeriasDTO buscarPorId(Long id) {

@@ -13,8 +13,7 @@ public class Ferias {
 
     private LocalDate dataInicio;
     private LocalDate dataFim;
-    
-    private String status; // Ex: SOLICITADO, APROVADO, USUFRUIDO
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "servidor_id")
