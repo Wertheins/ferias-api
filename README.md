@@ -40,7 +40,7 @@ Informações financeiras.
 SERVIDOR (1) ----< (N) FERIAS (1) ----< (1) PAGAMENTO
 ```
 
-![Modelo de Dados](docs/images/modelo-dados.jpg)
+![Modelo de Dados](ferias-apidocs/images/modelo-dados.jpg)
 
 ## 🔗 Endpoints da API
 
