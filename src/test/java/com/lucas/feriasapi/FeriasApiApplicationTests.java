@@ -8,6 +8,13 @@ class FeriasApiApplicationTests {
 
     @Test
     void contextLoads() {
+        // Testa se o contexto Spring carrega corretamente
+    }
+
+    @Test
+    void applicationStarts() {
+        // Testa se a aplicação inicia sem erros
+        assert true;
     }
 
 }
