@@ -1,5 +1,6 @@
 package com.lucas.feriasapi.service;
 
+import com.lucas.feriasapi.dto.CriarServidorDTO;
 import com.lucas.feriasapi.dto.ServidorDTO;
 import com.lucas.feriasapi.dto.FeriasDTO;
 import com.lucas.feriasapi.dto.PagamentoDTO;
@@ -31,7 +32,12 @@ public class ServidorService {
         return convertToDTO(servidor);
     }
 
-    public ServidorDTO criar(Servidor servidor) {
+    public ServidorDTO criar(CriarServidorDTO dto) {
+        Servidor servidor = new Servidor();
+        servidor.setNome(dto.getNome());
+        servidor.setMatricula(dto.getMatricula());
+        servidor.setEmail(dto.getEmail());
+        
         Servidor salvo = servidorRepository.save(servidor);
         return convertToDTO(salvo);
     }

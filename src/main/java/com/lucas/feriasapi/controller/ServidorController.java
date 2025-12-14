@@ -1,5 +1,6 @@
 package com.lucas.feriasapi.controller;
 
+import com.lucas.feriasapi.dto.CriarServidorDTO;
 import com.lucas.feriasapi.dto.ServidorDTO;
 import com.lucas.feriasapi.model.Servidor;
 import com.lucas.feriasapi.service.ServidorService;
@@ -33,7 +34,7 @@ public class ServidorController {
     }
 
     @PostMapping
-    public ResponseEntity<ServidorDTO> criar(@RequestBody Servidor servidor) {
-        return ResponseEntity.ok(servidorService.criar(servidor));
+    public ResponseEntity<ServidorDTO> criar(@RequestBody CriarServidorDTO dto) {
+        return ResponseEntity.ok(servidorService.criar(dto));
     }
 }
