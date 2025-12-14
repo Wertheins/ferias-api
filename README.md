@@ -172,17 +172,8 @@ curl http://localhost:8080/servidores/1/ferias
 curl http://localhost:8080/ferias/1
 ```
 
-## 📝 Observações
-
-- O sistema utiliza relacionamento **1:1** entre Férias e Pagamento para simplificar a consulta
-- O banco de dados é criado automaticamente pelo Hibernate (`ddl-auto=update`)
-- DTOs são utilizados para evitar problemas de serialização circular no JSON
-- Sem implementação de segurança/autenticação (conforme especificação da prova)
-
 ## 👥 Autores
 
 Lucas - Prova Técnica de Desenvolvedor
 
----
 
-**Data de entrega:** 14/12/2025 até 18:00
