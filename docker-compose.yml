@@ -1,0 +1,39 @@
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: ferias-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: L123@
+      MYSQL_DATABASE: ferias_db
+    ports:
+      - "3308:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - ferias-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  ferias-api:
+    build: .
+    container_name: ferias-api
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/ferias_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: L123@
+    ports:
+      - "8081:8080"
+    networks:
+      - ferias-network
+
+volumes:
+  mysql-data:
+
+networks:
+  ferias-network:
+    driver: bridge
